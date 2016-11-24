@@ -1,0 +1,24 @@
+{
+  "name": "js-application-architecture",
+  "version": "0.0.1",
+  "description": "practice code from the \"programming javascript applications\" book by Eric Elliot, contains code examples and do-overs for enhanced understanding",
+  "scripts": {
+    "connect": "serve -p 8000 ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arjun Kathuria",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "qunitjs": "^2.0.1",
+    "serve": "^1.4.0"
+  },
+  "keywords": [
+    "javascript",
+    "App",
+    "architecture"
+  ]
+}
