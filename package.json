@@ -4,6 +4,7 @@
   "description": "practice code from the \"programming javascript applications\" book by Eric Elliot, contains code examples and do-overs for enhanced understanding",
   "scripts": {
     "connect": "serve -p 8000 ./",
+    "eslint": "eslint src/**/*.js tests/unit/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Arjun Kathuria",
