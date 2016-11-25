@@ -1,7 +1,6 @@
 const chapter2 = (function chapter2() {
 
   /**
-   * @private
    * A function to showcase a lambda.
    * A lambda is a function that is used as data. In this case the .addTo() function passed into .forEach() is a lambda.
    *
@@ -16,7 +15,20 @@ const chapter2 = (function chapter2() {
     return result;
   };
 
+  /**
+   * Method Context
+   *
+   * @param {Number} number
+   * @param {Number} cutoff
+   * @returns {Boolean}
+   */
+  function highPass(number, cutoff) {
+    cutoff = cutoff || this.cutoff;
+    return (number >= cutoff);
+  }
+
   return {
-    sum
+    sum,
+    highPass
   };
 })();
