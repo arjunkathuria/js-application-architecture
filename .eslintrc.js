@@ -13,6 +13,7 @@ module.exports = {
     'qunit': true
   },
   rules: {
-    "no-console": "off"
+    "no-console": "off",
+    "ember-suave/require-access-in-comments": "off"
   }
 };
