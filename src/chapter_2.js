@@ -1,4 +1,4 @@
-const chapter2 = (function chapter2() {
+const chapter2 = (function chapter2() { // eslint-disable-line
 
   /**
    * A function to showcase a lambda.
@@ -27,8 +27,34 @@ const chapter2 = (function chapter2() {
     return (number >= cutoff);
   }
 
+  /**
+   * In a nutshell, A closure stores function state, even after its returned.
+   * To create a closure, simply define a fn inside a fn and then expose it.
+   * To expose a fn, return in or pass it to another fn. The inner fn will have access to vars declared in the outer fn.
+   * This technique is commonly used to give objects data privacy.
+   *
+   * This function is an Object Factory, exposes the `get` function which has access to the inner data variable.
+   * It should thus, be able to access it. Also called a privledged method or fn.
+   *
+   * @returns {Object}
+   */
+  function closure() {
+    let data = 1;
+    let get;
+
+    get = function() {
+      return data;
+    };
+
+    return {
+      get
+    };
+  }
+
   return {
     sum,
-    highPass
+    highPass,
+    closure
   };
+
 })();

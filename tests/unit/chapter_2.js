@@ -1,3 +1,4 @@
+/* global chapter2 */
 
 QUnit.test('lambdas', function(assert) {
   assert.equal(chapter2.sum([5, 5, 5]), 15, 'result should be 15');
@@ -31,7 +32,7 @@ QUnit.test('function declaration hoisting', function(assert) {
    * The second pass is execution pass.
    * After the first pass, all declared functions are available, but variables are still undefined, untill the line defining / giving them value is hit.
    */
-  
+
   function number() {
     return 1;
   }
@@ -44,12 +45,12 @@ QUnit.test('function declaration hoisting', function(assert) {
       return 2;
     }
   }());
- 
+
   // outer scopes number is available here.
   assert.equal(number(), 1, 'outer scope still works!');
 });
 
-QUnit.test('Function expression hoisting', function(assert){
+QUnit.test('Function expression hoisting', function(assert) {
   /**
    * Function Expressions do not share this behaviour, because they do not declare a function.
    * Instead, they declare a variable and are subject to the same variable behaviour.
@@ -58,7 +59,7 @@ QUnit.test('Function expression hoisting', function(assert){
     return 1;
   }
 
-  (function(){
+  (function() {
     try {
       number();
     } catch(e) {
@@ -75,3 +76,51 @@ QUnit.test('Function expression hoisting', function(assert){
 
   assert.equal(number(), 1, 'outer scope still works');
 });
+
+QUnit.test('Closure for object privacy', function(assert) {
+  let obj = chapter2.closure();
+  try {
+    assert.ok(data, 'variable not availble outside closure'); // eslint-disable-line
+  } catch(e) {
+    assert.ok(true, 'the data variable is only available to privlidged methods');
+  }
+
+  assert.equal(obj.get(), 1, '.get() privledged method should have access to data');
+});
+
+(function() {
+  let arr = [];
+  let count = 1;
+  let delay = 20;
+  let timer, complete;
+
+  timer = function timer() {
+    setTimeout(function inner() {
+      arr.push(count);
+
+      if (count < 3) {
+        count += 1;
+        timer();
+      } else {
+        complete();
+      }
+    }, delay);
+  };
+
+  QUnit.test('closure with setTimeout.', function(assert) {
+    let done = assert.async();
+
+    complete = function complete() {
+      assert.equal(arr.join(','), '1,2,3', 'arr should be [1,2,3]');
+
+      done();
+    };
+
+    timer();
+
+    // timer(), being async in nature, would get pushed to a new figurative call-stack that would only execute when this one finsishes.
+    // thus when code hits this line, the array should be empty as the async stuff hasn't happened yet.
+    assert.equal(arr.length, 0, 'arr should be zero untill first timeout');
+  });
+
+}());
