@@ -124,3 +124,25 @@ QUnit.test('Closure for object privacy', function(assert) {
   });
 
 }());
+
+QUnit.test('Polymorphic branching', function(assert) {
+  let { morph } = chapter2; // object destructuring
+  let test1 = morph('cats', 3),
+    test2 = morph('dogs', 2),
+    test3 = morph(5);
+
+  assert.equal(test1, 'The pet Store has 3 cats.', '3 cats');
+  assert.equal(test2, 'The pet Store has 2 dogs.', '2 dogs');
+  assert.equal(test3, 'The pet Store has 5 turtles.', '3 turtles');
+});
+
+QUnit.test('Dynamic Method dispatch', function(assert) {
+  let { greet } = chapter2;
+  let test1 = greet();
+  let test2 = greet('hello', 'world');
+  let test3 = greet('goodbye', 'world');
+
+  assert.equal(test1, 'initializing...', 'default initiation complete');
+  assert.equal(test2, 'Hello world', 'Dispatched to hello method');
+  assert.equal(test3, 'Goodbye, cruel world', 'Dispatched to goodbye method');
+});
